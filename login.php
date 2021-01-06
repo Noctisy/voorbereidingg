@@ -1,4 +1,4 @@
-<!-- Furkan ucar OITAOO8B -->
+<!--Gemaakt door Yusa Celiker OITAOO8B -->
 <?php
 
 session_start();
@@ -22,9 +22,11 @@ if($no_error){
   $gebruikersnaam = $_POST['gebruikersnaam'];
   $wachtwoord = $_POST['wachtwoord'];
 
-  $db = new database('localhost', 'root', '', 'drempeltoets', 'utf8');
+  $db = new database('localhost', 'root', '', 'hengelsport', 'utf8');
   $db->authenticate_user($wachtwoord, $gebruikersnaam);
-}
+
+
+  }
 }
 
  ?>
@@ -46,7 +48,6 @@ if($no_error){
 			</fieldset>
       <div align="center">
           <button class="btn btn-outline-success" type="submit" name="submit" value="submit">Login</button>
-          <a class="btn btn-outline-info" href="register.php">Registreren</a>
       </div>
   </form>
 

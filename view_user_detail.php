@@ -1,10 +1,10 @@
-<!--Gemaakt door furkan ucar OITAOO8B -->
+<!--Gemaakt door Yusa Celiker OITAOO8B -->
 <?php
 
 session_start();
 
 if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
-    header('location: index.php');
+    header('location: homepagina.php');
     exit;
   }
 include 'database.php';
@@ -23,16 +23,22 @@ include 'database.php';
   </head>
 
   <body>
-
-    <div align="center">
-        <legend> View user details </legend>
-        <a class="btn btn-success" href="index.php">Home</a> |
-        <a class="btn btn-info" href="view_edit_delete_medewerker.php">View edit delete medewerker</a>
-    </div> <br><br>
+    <div>
+      <legend style="text-align: center;"> DE HENGELSPORT </legend>
+      <img src="img\logo.png">
+      <a class="btn btn-success" href="leverancier_toevoegen.php" style="margin-left:530;">leverancier toevoegen</a>
+      <a class="btn btn-danger" href="logout.php" style="margin-left:760px; margin-top:-200px">Logout</a>
+        <div class="topnav">
+          <a class="btn btn-outline-info" href="view_edit_delete_artikelen.php">view edit artikelen</a><br><br>
+          <a class="btn btn-outline-info" href="view_edit_delete_leverancier.php">view edit leverancier</a><br><br>
+          <a class="btn btn-outline-info" href="view_edit_delete_locatie.php">view edit locatie</a><br><br>
+          <a class="btn btn-outline-info" href="voorraad.php">voorraad bekijken</a><br><br>
+          <a class="btn btn-outline-info" href="contact.php">contact pagina</a><br><br>
+        </div>
 
     <?php
 
-    $db = new database('localhost', 'root', '', 'drempeltoets', 'utf8');
+    $db = new database('localhost', 'root', '', 'hengelsport', 'utf8');
     // show_profile_details_user returns an associative array (get first index first)
     $result_set = $db->view_user_detail($_SESSION['gebruikersnaam'])[0];
 
@@ -41,7 +47,7 @@ include 'database.php';
     $row_data = array_values($result_set);
     ?>
 
-    <div class="container-xl">
+    <div class="container" style="margin-top:-400px; margin-right:500px;">
         <div class="table-responsive">
             <div class="table-wrapper">
                 <div class="table-title">

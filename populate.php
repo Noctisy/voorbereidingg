@@ -37,7 +37,7 @@ $no_error = $obj->has_provided_input_for_required_fields($fields);
 
 
     $db = new database('localhost', 'root', '', 'hengelsport', 'utf8');
-    $db->create_medewerker($usertype_id, $voorletters, $voorvoegsels, $achternaam, $gebruikersnaam, $Wachtwoord);
+    $db->populate($usertype_id, $voorletters, $voorvoegsels, $achternaam, $gebruikersnaam, $wachtwoord, $levID, $product, $type, $inkoopprijs, $verkoopprijs,$leverancier, $telefoon, $locatie);
 
       header('location: index.php');
       exit;
@@ -56,8 +56,7 @@ $no_error = $obj->has_provided_input_for_required_fields($fields);
     <div>
       <legend style="text-align: center;"> DE HENGELSPORT </legend>
       <img src="img\logo.png">
-      <a class="btn btn-success" href="view_edit_delete_medewerker.php" style="margin-left:560;">account beheer</a>
-      <a class="btn btn-danger" href="logout.php" style="margin-left:760px; margin-top:-200px">Logout</a>
+      <a class="btn btn-danger" href="logout.php" style="margin-left:1780px; margin-top:-200px">Logout</a>
         <div class="topnav">
           <a class="btn btn-outline-info" href="view_edit_delete_medewerker.php">view edit delete medewerker</a><br><br>
           <a class="btn btn-outline-info" href="view_edit_delete_artikelen.php">view edit artikelen</a><br><br>
@@ -69,15 +68,14 @@ $no_error = $obj->has_provided_input_for_required_fields($fields);
 
       <form method="post" align="center" action='register.php' method='post' accept-charset='UTF-8' style="margin-top:-350px;">
       <fieldset >
-        <legend>Registratie medewerker</legend>
-        <input type="text" name="usertype_id" placeholder="usertype_id" required/>
-        <input type="text" name="voorletters" placeholder="voorletters" required/><br><Br>
-        <input type="text" name="voorvoegsels" placeholder="voorvoegsels" required/>
-        <input type="text" name="achternaam" placeholder="achternaam" required/><br><br>
-        <input type="text" name="gebruikersnaam" placeholder="gebruikersnaam" required/>
-        <input type="password" name="Wachtwoord" placeholder="Wachtwoord" required/><br><br>
+        <legend>Registratie admin acc</legend>
+        <input type="text" name="usertype_id" placeholder="usertype_id" value="1" hidden required/>
+        <input type="text" name="voorletters" placeholder="voorletters" value="admin" hidden required/><br><Br>
+        <input type="text" name="voorvoegsels" placeholder="voorvoegsels" value="admin" hidden required/>
+        <input type="text" name="achternaam" placeholder="achternaam" value="admin" hidden required/><br><br>
+        <input type="text" name="gebruikersnaam" placeholder="gebruikersnaam"value="admin" hidden required/>
+        <input type="password" name="Wachtwoord" placeholder="Wachtwoord" value="admin" hidden required/><br><br>
         <button class="btn btn-outline-success" type="submit" name="submit" value="Sign up!">Register</button>
-        <a class="btn btn-outline-info" href="index.php">homepagina</a>
       </fieldset>
     </form>
   </body>

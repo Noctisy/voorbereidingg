@@ -1,16 +1,16 @@
-<!--Gemaakt door furkan ucar OITAOO8B -->
+<!--Gemaakt door Yusa Celiker OITAOO8B -->
 <?php
 
 session_start();
 
 if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
-    header('location: index.php');
+    header('location: homepagina.php');
     exit;
   }
 
 include 'database.php';
 
-$db = new database('localhost', 'root', '', 'drempeltoets', 'utf8');
+$db = new database('localhost', 'root', '', 'hengelsport', 'utf8');
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -56,12 +56,19 @@ if (isset($_GET['id'])) {
   </head>
 
   <body>
-
-    <div align="center">
-        <legend> View edit and delete artikelen</legend>
-        <a class="btn btn-success" href="index.php">Home</a> |
-        <a class="btn btn-warning" href="artikel_toevoegen.php">artikelen toevoegen</a>
-    </div> <br><br>
+    <div>
+      <legend style="text-align: center;"> DE HENGELSPORT </legend>
+      <img src="img\logo.png">
+      <a class="btn btn-success" href="artikel_toevoegen.php" style="margin-left:530;">artikel toevoegen</a>
+      <a class="btn btn-danger" href="logout.php" style="margin-left:760px; margin-top:-200px">Logout</a>
+        <div class="topnav">
+          <a class="btn btn-outline-info" href="view_edit_delete_artikelen.php">view edit artikelen</a><br><br>
+          <a class="btn btn-outline-info" href="view_edit_delete_leverancier.php">view edit leverancier</a><br><br>
+          <a class="btn btn-outline-info" href="view_edit_delete_locatie.php">view edit locatie</a><br><br>
+          <a class="btn btn-outline-info" href="voorraad.php">voorraad bekijken</a><br><br>
+          <a class="btn btn-outline-info" href="contact.php">contact pagina</a><br><br>
+        </div>
+      </div>
 
     <?php
 
@@ -81,7 +88,7 @@ if (isset($_GET['id'])) {
         };
         ?>
 
-    <div class="container-xl">
+      <div class="container" style="margin-top:-300px; margin-right:500px;">
         <div class="table-responsive">
             <div class="table-wrapper">
                 <div class="table-title">
@@ -109,11 +116,11 @@ if (isset($_GET['id'])) {
                                 </td>
                             <?php } ?>
                             <td>
-                                <a class="btn btn-info" href="artikelwijzigen.php?user_id=<?php echo $row_id; ?>&id=<?php echo $row['id']?>" class="edit_btn" >Edit</a>
+                                <a class="btn btn-info" href="artikelwijzigen.php?id=<?php echo $row_id; ?>&id=<?php echo $row['id']?>" class="edit_btn" >Edit</a>
                             </td>
                             <td>
-                                <a class="btn btn-danger" href="view_edit_delete_artikelen.php?user_id=<?php echo $row_id; ?>&id=<?php echo $row['id']?>" class="del_btn">Delete</a>
-                            </td>
+                              <a class="btn btn-danger" href="view_edit_delete_artikelen.php?user_id=<?php echo $row_id; ?>&id=<?php echo $row['id']?>" class="del_btn">Delete</a>
+                          </td>
                       </tr>
 
                     <?php } ?>

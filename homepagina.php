@@ -18,6 +18,7 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
       <img src="img\logo.png">
       <a class="btn btn-danger" href="logout.php" style="margin-left:1790px; margin-top:-200px">Logout</a>
         <div class="topnav">
+          <a class="btn btn-outline-info" href="view_edit_delete_medewerker.php">view edit delete user</a><br><br>
           <a class="btn btn-outline-info" href="view_edit_delete_artikelen.php">view edit artikelen</a><br><br>
           <a class="btn btn-outline-info" href="view_edit_delete_leverancier.php">view edit leverancier</a><br><br>
           <a class="btn btn-outline-info" href="view_edit_delete_locatie.php">view edit locatie</a><br><br>

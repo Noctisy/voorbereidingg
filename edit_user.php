@@ -1,19 +1,20 @@
-<!--Gemaakt door furkan ucar OITAOO8B -->
+<!--Gemaakt door Yusa Celiker OITAOO8B -->
 <?php
 
 session_start();
 
 if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
-    header('location: index.php');
+    header('location: homepagina.php');
     exit;
-  }
+}
 include 'database.php';
 include 'HelperFunctions.php';
 
-$db = new database('localhost', 'root', '', 'drempeltoets', 'utf8');
+$db = new database('localhost', 'root', '', 'hengelsport', 'utf8');
 
 if (isset($_GET['id'])) {
   $id = $_GET['id'];
+  $usertype_id = $_GET['usertype_id'];
   $voorletters = $_GET['voorletters'];
   $achternaam = $_GET['voorvoegsels'];
   $achternaam = $_GET['achternaam'];
@@ -28,6 +29,7 @@ if(isset($_POST['submit'])){
   // maak een array met alle name attributes
   $fields = [
       "id",
+      "usertype_id",
       "voorletters",
       "voorvoegsels",
       "achternaam"
@@ -39,12 +41,13 @@ $no_error = $obj->has_provided_input_for_required_fields($fields);
   // in case of field values, proceed, execute insert
   if($no_error){
     $id = $_POST['id'];
+    $usertype_id = $_POST['usertype_id'];
     $voorletters = $_POST['voorletters'];
     $voorvoegsels = $_POST['voorvoegsels'];
     $achternaam = $_POST['achternaam'];
 
 
-    $db->editUser($id, $voorletters, $voorvoegsels, $achternaam);
+    $db->editUser($id, $usertype_id, $voorletters, $voorvoegsels, $achternaam);
 
       header('location: edit_user.php');
       exit;
@@ -57,14 +60,28 @@ $no_error = $obj->has_provided_input_for_required_fields($fields);
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <title>medewerker wijzigen</title>
+    <style>
+        .table-responsive{
+            overflow-x: unset !important;
+        }
+    </style>
   </head>
 
   <body>
-    <div align="center">
-        <legend> medewerker wijzigen</legend>
-        <a class="btn btn-success" href="index.php">Home</a> |
-        <a class="btn btn-info" href="view_edit_delete_medewerker.php">Show medewerker details</a>
-    </div> <br><br>
+    <div>
+      <legend style="text-align: center;"> DE HENGELSPORT </legend>
+      <img src="img\logo.png">
+      <a class="btn btn-success" href="view_edit_delete_medewerker.php" style="margin-left:560;">account beher</a>
+      <a class="btn btn-danger" href="logout.php" style="margin-left:760px; margin-top:-200px">Logout</a>
+        <div class="topnav">
+          <a class="btn btn-outline-info" href="view_edit_delete_medewerker.php">view edit delete medewerker</a><br><br>
+          <a class="btn btn-outline-info" href="view_edit_delete_artikelen.php">view edit artikelen</a><br><br>
+          <a class="btn btn-outline-info" href="view_edit_delete_leverancier.php">view edit leverancier</a><br><br>
+          <a class="btn btn-outline-info" href="view_edit_delete_locatie.php">view edit locatie</a><br><br>
+          <a class="btn btn-outline-info" href="voorraad.php">voorraad bekijken</a><br><br>
+          <a class="btn btn-outline-info" href="contact.php">contact pagina</a><br><br>
+        </div>
+      </div>
 
     <?php
 
@@ -75,7 +92,7 @@ $no_error = $obj->has_provided_input_for_required_fields($fields);
         $columns = array_keys($results[0]);
         ?>
 
-    <div class="container-xl">
+    <div class="container-xl" style="margin-top:-450px; margin-right:400px;">
         <div class="table-responsive">
             <div class="table-wrapper">
                 <div class="table-title">
@@ -107,6 +124,7 @@ $no_error = $obj->has_provided_input_for_required_fields($fields);
               <form method="post" align="center" action='edit_user.php' method='post' accept-charset='UTF-8'>
                 <fieldset>
                   <input type="text" name="id" placeholder="id" required/>
+                  <input type="text" name="usertype_id" placeholder="usertype_id" required/>
                   <input type="text" name="voorletters" placeholder="voorletters" required/>
                   <input type="text" name="voorvoegsels" placeholder="voorvoegsels" required/>
                   <input type="text" name="achternaam" placeholder="achternaam" required/>

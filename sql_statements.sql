@@ -1,48 +1,59 @@
--- Gemaakt door Furkan Uçar OITAOO8B
+-- Gemaakt door Yusa Celiker OITAOO8B
 -- create new db
-CREATE DATABASE drempeltoets;
+CREATE DATABASE hengelsport;
 
--- tabel activiteiten aanmaken.
+-- tabel Usertype aanmaken, met dit tabel kun je kijken of iemand een admin is of een medewerker is
+CREATE TABLE usertype(
+    id INT NOT NULL AUTO_INCREMENT,
+    type VARCHAR(255),
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL,
+    PRIMARY KEY(id)
+);
+
+-- insert entrIES into table usertype (admin AND user)
+INSERT INTO usertype VALUES (NULL, 'admin', now(), now()), (NULL, 'user', now(), now());
+
+-- tabel Locatie aanmaken.
 CREATE TABLE locatie(
     id INT NOT NULL AUTO_INCREMENT,
     locatie VARCHAR(250) NOT NULL,
     PRIMARY KEY(id)
 );
 
--- tabel voorraad aanmaken.
-  CREATE TABLE voorraad(
-      id INT NOT NULL AUTO_INCREMENT,
-      LocatieID INT NOT NULL,
-      ArtikelID INT NOT NULL,
-      aantal VARCHAR(250) NOT NULL,
-      PRIMARY KEY(id),
-      FOREIGN KEY(ArtikelID) REFERENCES Artikel(id),
-      FOREIGN KEY(locatieID) REFERENCES Locatie(id)
-  );
-
--- tabel Jongeren aanmaken.
-CREATE TABLE Artikel(
+-- tabel Leverancier aanmaken.
+CREATE TABLE leverancier(
     id INT NOT NULL AUTO_INCREMENT,
-    FabriekID INT NOT NULL,
+    leverancier VARCHAR(250) NOT NULL,
+    telefoon INT(15) NOT NULL,
+    PRIMARY KEY(id)
+);
+
+-- tabel Artikel aanmaken.
+CREATE TABLE artikel(
+    id INT NOT NULL AUTO_INCREMENT,
+    levID INT NOT NULL,
     product VARCHAR(250) NOT NULL,
     type VARCHAR(250) NOT NULL,
     inkoopprijs INT(250) NOT NULL,
     verkoopprijs INT(250) NOT NULL,
     PRIMARY KEY(id),
-    FOREIGN KEY(FabriekID) REFERENCES fabriek(id)
+    FOREIGN KEY(levID) REFERENCES leverancier(id)
 );
 
--- telefoon staat op varchar 15, heb het gegoogled meeste bedrijven doen tot 15 omdat de internationale telefoonnummer tot 15 kan gaan.
--- tabel activiteiten aanmaken.
-CREATE TABLE fabriek(
+-- tabel Voorraad aanmaken.
+CREATE TABLE voorraad(
     id INT NOT NULL AUTO_INCREMENT,
-    fabriek VARCHAR(250) NOT NULL,
-    telefoon VARCHAR(15) NOT NULL,
-    PRIMARY KEY(id)
+    locatieID INT NOT NULL,
+    productID INT NOT NULL,
+    aantal VARCHAR(250) NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY(locatieID) REFERENCES locatie(id),
+    FOREIGN KEY(productID) REFERENCES artikel(id)
 );
 
 -- tabel Medewerker aanmaken.
-CREATE TABLE Medewerker(
+CREATE TABLE medewerker(
     id INT NOT NULL AUTO_INCREMENT,
     usertype_id INT NOT NULL,
     voorletters VARCHAR(250) NOT NULL,
